@@ -10,7 +10,10 @@
     "migrate:latest": "knex migrate:latest",
     "migrate:rollback": "knex migrate:rollback",
     "seed:make": "knex seed:make",
-    "seed:run": "knex seed:run"
+    "seed:run": "knex seed:run",
+    "build:common": "tsc -p common/tsconfig.json",
+    "build:api": "cd apps/api-app && npm run build",
+    "build": "npm run build:common && npm run build:api"
   },
   "keywords": [],
   "author": "",
@@ -21,6 +24,7 @@
   "dependencies": {
     "@nestjs/common": "^11.1.12",
     "@nestjs/core": "^11.1.12",
+    "bcrypt": "^6.0.0",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.3",
     "dotenv": "^17.2.3",

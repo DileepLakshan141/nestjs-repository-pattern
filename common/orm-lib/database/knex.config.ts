@@ -13,10 +13,7 @@ const knexConfig = {
     password: process.env.DB_PASSWORD || "postgres",
     database: process.env.DB_NAME || "task_management",
   },
-  pool: {
-    min: 2,
-    max: 10,
-  },
+  pool: { min: 2, max: 10 },
   migrations: {
     directory: "./common/orm-lib/database/migrations",
     tableName: "knex_migrations",
@@ -24,7 +21,6 @@ const knexConfig = {
 };
 
 const knex = Knex(knexConfig);
-
 Model.knex(knex);
 
 export default knex;

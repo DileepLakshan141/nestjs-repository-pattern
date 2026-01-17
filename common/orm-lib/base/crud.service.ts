@@ -10,20 +10,7 @@ export interface ICrudService<T> {
     page: number,
     limit: number,
     filters?: Partial<T>,
-  ): Promise<{
-    data: T[];
-    total: number;
-    page: number;
-    limit: number;
-    totalPages: number;
-  }>;
-}
-
-export interface PaginationOptions {
-  page: number;
-  limit: number;
-  sortBy?: string;
-  sortOrder?: "asc" | "desc";
+  ): Promise<PaginationResult<T>>;
 }
 
 export interface PaginationResult<T> {

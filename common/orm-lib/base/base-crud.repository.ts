@@ -27,11 +27,9 @@ export class BaseCrudRepository<
 
   async findAll(filters?: Partial<T>): Promise<T[]> {
     let query = this.model.query();
-
     if (filters) {
       query = query.where(filters as any);
     }
-
     return (await query) as T[];
   }
 
@@ -40,10 +38,9 @@ export class BaseCrudRepository<
   }
 
   async delete(id: number): Promise<boolean> {
-    const result = await this.model.query().patchAndFetchById(id, {
+    const result = (await this.model.query().patchAndFetchById(id, {
       deleted_at: new Date(),
-    } as any);
-
+    } as any)) as T | undefined;
     return !!result;
   }
 
@@ -58,16 +55,13 @@ export class BaseCrudRepository<
     filters?: Partial<T>,
   ): Promise<PaginationResult<T>> {
     let query = this.model.query();
-
     if (filters) {
       query = query.where(filters as any);
     }
 
     const total = await query.resultSize();
-
     const offset = (page - 1) * limit;
     const totalPages = Math.ceil(total / limit);
-
     const data = (await query.offset(offset).limit(limit)) as T[];
 
     return {
@@ -83,11 +77,9 @@ export class BaseCrudRepository<
 
   async count(filters?: Partial<T>): Promise<number> {
     let query = this.model.query();
-
     if (filters) {
       query = query.where(filters as any);
     }
-
     return await query.resultSize();
   }
 

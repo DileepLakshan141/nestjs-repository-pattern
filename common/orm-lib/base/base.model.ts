@@ -14,10 +14,8 @@ export class BaseModel extends Model {
     this.updated_at = new Date();
   }
 
-  // Format data before sending to client
   $formatJson(json: any) {
     json = super.$formatJson(json);
-
     return Object.keys(json).reduce((result: any, key: string) => {
       const camelKey = key.replace(/_([a-z])/g, (g) => g[1].toUpperCase());
       result[camelKey] = json[key];
@@ -34,7 +32,6 @@ export class BaseModel extends Model {
       result[snakeKey] = json[key];
       return result;
     }, {});
-
     return super.$parseDatabaseJson(json);
   }
 }
